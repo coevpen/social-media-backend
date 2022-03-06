@@ -14,8 +14,7 @@ const UserSchema = new Schema(
             unique: true,
             //matching validation with mongoose
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 
-            'Please add a valid email address.'
-            ]
+            'Please add a valid email address.']
         },
         thoughts: [
             {

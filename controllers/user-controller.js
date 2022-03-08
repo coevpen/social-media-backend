@@ -15,7 +15,7 @@ const userController = {
             })
             .catch(err => {
                 console.log(err);
-                res.sentStatus(400);
+                res.sendStatus(400);
             });
     },
 

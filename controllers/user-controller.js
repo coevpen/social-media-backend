@@ -78,13 +78,31 @@ const userController = {
     },
 
     //add a friend to friends list
-    addFriend(){
-
+    addFriend({ params }, res){
+        User.findOneAndUpdate(
+            { _id: params.userId },
+            { $push: { friends: params.friendId } },
+            { new: true, runValidators: true }
+        )
+        .then(dbFriend => {
+            if(!dbFriend){
+                res.sendStatus(404).json({ message: "There is no user with this id!" });
+                return;
+            }
+            res.json(dbFriend);
+        })
+        .catch(err => res.json(err));
     },
 
     // remove a friend from friends list
-    deleteFriend(){
-
+    deleteFriend({ params }, res){
+        User.findOneAndUpdate(
+            { _id: params.userId },
+            { $pull: { friends: params.friendId } },
+            { new: true }
+        )
+        .then(dbFriend => res.json(dbFriend))
+        .catch(err => res.json(err));
     }
 };
 
